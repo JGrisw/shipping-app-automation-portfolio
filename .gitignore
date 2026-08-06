@@ -1,0 +1,17 @@
+node_modules/
+
+# Environment variables and credentials
+.env
+.env.*
+!.env.example
+
+# Playwright output
+test-results/
+playwright-report/
+blob-report/
+
+# Saved browser authentication
+playwright/.auth/
+
+# macOS
+.DS_Store
