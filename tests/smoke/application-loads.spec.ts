@@ -12,9 +12,15 @@ import { test, expect } from '@playwright/test';
 
 test('application loads successfully', async ({ page }) =>
 {
-// Navigate to the environment configured by the baseURL
+    // Navigate to the environment configured by the baseURL
     const response = await page.goto('/');
 
-// Confirm that navigation returned a successful HTTP response    
+    // Confirm that navigation returned a successful HTTP response    
     expect(response?.ok()).toBeTruthy();
+
+    // Confirm the expected landing-page navigation rendered
+    await expect(
+        page.getByRole('banner').getByRole('link', { name: 'Log in' })
+    ).toBeVisible();
+
 });
