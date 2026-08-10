@@ -1,44 +1,60 @@
-import { defineConfig , devices} from '@playwright/test';
+import { defineConfig, devices } from '@playwright/test';
 import dotenv from 'dotenv';
 
 /*
-*What:
-* load the key/value pairs from our local .env file into process.env
-* 
-* WHY:
-* Environment-specific values such as the application URL
-* and login credentials should remain outside the test code
-* this lets the same test suite run against different environments
-* without changing tests or committing private information
-*/
+ * What:
+ * Load environment configuration and define how the Playwright suite runs.
+ *
+ * Why:
+ * Centralizing environment, browser, and authentication settings keeps tests
+ * portable while separating logged-out and authenticated test contexts.
+ */
 
 dotenv.config();
 
-export default defineConfig
-({
+export default defineConfig({
+  // Keep test discovery predictable and separate from framework configuration.
+  testDir: './tests',
 
-// Keep test discovery predictable and separate from framework configuration
-    testDir: './tests',
+  use: {
+    // Allows relative navigation such as page.goto('/login').
+    baseURL: process.env.APP_BASE_URL,
 
-    use: 
+    // Capture diagnostics only when a test needs to retry.
+    trace: 'on-first-retry',
+  },
+
+  projects: [
     {
-// Allows relative navigation such as page.goto('/login')
-        baseURL: process.env.APP_BASE_URL,
-    
-// Capture diagnostics only when a test needs to retry
-        trace: 'on-first-retry',
+      // Creates reusable authenticated browser state.
+      name: 'setup',
+      testMatch: /.*\.setup\.ts/,
     },
 
-    projects:[
-        {
-//Start with one browser to keep the initial suite focused and fast           
-            name: 'chromium',
+    {
+      // Public tests intentionally start without authentication.
+      name: 'chromium-public',
+      testMatch: [
+        /.*smoke\/.*\.spec\.ts/,
+        /.*auth\/.*\.spec\.ts/,
+      ],
 
-// Reuse Playwright's standard desktop browser context
-            use: 
-            { 
-                ...devices['Desktop Chrome'] 
-            },
-        },
-    ],
+      use: {
+        ...devices['Desktop Chrome'],
+      },
+    },
+
+    {
+      // Protected-page tests start with the saved authenticated state.
+      name: 'chromium-authenticated',
+      testMatch: /.*authenticated\/.*\.spec\.ts/,
+
+      use: {
+        ...devices['Desktop Chrome'],
+        storageState: 'playwright/.auth/user.json',
+      },
+
+      dependencies: ['setup'],
+    },
+  ],
 });
