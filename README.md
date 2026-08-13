@@ -1,5 +1,7 @@
 # Shipping App Automation Portfolio
 
+[![Playwright Tests](https://github.com/JGrisw/shipping-app-automation-portfolio/actions/workflows/playwright.yml/badge.svg)](https://github.com/JGrisw/shipping-app-automation-portfolio/actions/workflows/playwright.yml)
+
 A standalone Playwright and TypeScript automation suite demonstrating black-box testing of a real-world shipping application.
 
 ## What This Project Demonstrates
