@@ -30,6 +30,8 @@ jobs:
 
       - name: Install dependencies
         run: npm ci
+      - name: Type-check tests
+        run: npm run typecheck
 
       # Install only Chromium because that is the browser this suite currently targets
       - name: Install Chromium
