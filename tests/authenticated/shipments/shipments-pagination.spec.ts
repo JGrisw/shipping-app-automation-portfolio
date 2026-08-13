@@ -1,5 +1,5 @@
 import { test, expect } from '@playwright/test';
-import { ShipmentsPage } from '../../pages/ShipmentsPage';
+import { ShipmentsPage } from '../../../pages/ShipmentsPage';
 
 /*
  * What:
