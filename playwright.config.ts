@@ -16,6 +16,12 @@ export default defineConfig({
   // Keep test discovery predictable and separate from framework configuration.
   testDir: './tests',
 
+  // Fail CI if a focused test like test.only is accidentally committed
+  forbidOnly: !!process.env.CI,
+
+  // Use one worker in CI for stability; keep local runs parallel
+  workers: process.env.CI ? 1 : undefined,
+
   use: {
     // Allows relative navigation such as page.goto('/login').
     baseURL: process.env.APP_BASE_URL,
