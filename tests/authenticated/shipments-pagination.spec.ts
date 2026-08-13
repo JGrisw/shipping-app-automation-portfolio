@@ -1,4 +1,5 @@
 import { test, expect } from '@playwright/test';
+import { ShipmentsPage } from '../../pages/ShipmentsPage';
 
 /*
  * What:
@@ -10,7 +11,10 @@ import { test, expect } from '@playwright/test';
  */
 
 test('shipments pagination loads the next result set', async ({ page }) => {
-    await page.goto('/app/orders/shipments');
+
+    const shipmentsPage = new ShipmentsPage(page);
+
+    await shipmentsPage.goto();
 
     const nextPageButton = page.getByRole('button', { name: 'Next page' });
     const previousPageButton = page.getByRole('button', { name: 'Previous page' });

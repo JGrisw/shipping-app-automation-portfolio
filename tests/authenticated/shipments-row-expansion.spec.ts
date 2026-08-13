@@ -1,4 +1,5 @@
 import { test, expect } from '@playwright/test';
+import { ShipmentsPage } from '../../pages/ShipmentsPage';
 
 /*
  * What:
@@ -10,7 +11,10 @@ import { test, expect } from '@playwright/test';
  */
 
 test('shipment row expands to show details', async ({ page }) => {
-    await page.goto('/app/orders/shipments');
+
+    const shipmentsPage = new ShipmentsPage(page);
+
+    await shipmentsPage.goto();
 
     const firstShipmentCell = page
         .getByRole('cell', { name: '#' })

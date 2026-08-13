@@ -1,4 +1,5 @@
 import { test, expect } from '@playwright/test';
+import { ShipmentsPage } from '../../pages/ShipmentsPage';
 
 /**
  * What:
@@ -10,10 +11,13 @@ import { test, expect } from '@playwright/test';
  */
 
 test('shipments table displays core columns', async ({ page }) => {
-    // navigate directly because sidebar navigation is covered seperately
-    await page.goto('/app/orders/shipments');
 
-    //verify stable table structure rather than dynamic shipment data
+    const shipmentsPage = new ShipmentsPage(page);
+
+    // navigate directly because sidebar navigation is covered seperately
+    await shipmentsPage.goto();
+
+    // verify stable table structure rather than dynamic shipment data
     await expect(
         page.getByText('Shipment ID', { exact: true })
     ).toBeVisible();
