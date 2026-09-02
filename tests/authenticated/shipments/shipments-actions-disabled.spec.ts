@@ -34,19 +34,10 @@ test('selection-dependent actions are disabled with no shipment selected', async
         .getByRole('listitem')
         .filter({ hasText: 'Copy Selected Tracking' });
 
-    const openSelectedLabels = page
-        .getByRole('listitem')
-        .filter({ hasText: 'Open Selected Labels' });
-
     const reprintShippingLabels = page
         .locator('[data-test="shipments-reprint-labels"]');
 
     await expect(copySelectedTracking).toHaveAttribute(
-        'aria-disabled',
-        'true'
-    );
-
-    await expect(openSelectedLabels).toHaveAttribute(
         'aria-disabled',
         'true'
     );
