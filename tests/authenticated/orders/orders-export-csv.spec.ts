@@ -1,7 +1,6 @@
 import { test, expect } from '@playwright/test';
 import { OrdersPage } from '../../../pages/OrdersPage';
 import { readFile } from 'node:fs/promises';
-import { head } from 'motion/react-client';
 
 /*
  * What:
