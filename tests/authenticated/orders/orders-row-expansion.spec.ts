@@ -15,6 +15,7 @@ test('order row expands to show details', async ({ page }) => {
     const ordersPage = new OrdersPage(page);
 
     await ordersPage.goto();
+    await ordersPage.waitForRows();
 
     const firstOrderCell = page
         .locator('tbody tr[data-row-id] td:nth-child(4)')

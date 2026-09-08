@@ -13,6 +13,7 @@ test('eligible shipment opens existing label PDF for reprint', async ({ page, co
         const shipmentsPage = new ShipmentsPage(page);
 
         await shipmentsPage.goto();
+        await shipmentsPage.waitForRows();
 
         const eligibleShipmentCheckbox = page
             .getByRole('row')

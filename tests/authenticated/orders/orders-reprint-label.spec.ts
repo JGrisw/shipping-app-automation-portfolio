@@ -13,6 +13,7 @@ test('eligble order opens existing label PDF for reprint', async ({ page, contex
     const ordersPage = new OrdersPage(page);
 
     await ordersPage.goto();
+    await ordersPage.waitForRows();
 
     const eligibleOrderCheckbox = page
         .getByRole('row')

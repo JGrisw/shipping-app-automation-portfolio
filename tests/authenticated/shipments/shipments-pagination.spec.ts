@@ -15,6 +15,7 @@ test('shipments pagination loads the next result set', async ({ page }) => {
     const shipmentsPage = new ShipmentsPage(page);
 
     await shipmentsPage.goto();
+    await shipmentsPage.waitForRows();
 
     const nextPageButton = page.getByRole('button', { name: 'Next page' });
     const previousPageButton = page.getByRole('button', { name: 'Previous page' });

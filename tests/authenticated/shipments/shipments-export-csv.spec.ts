@@ -15,6 +15,7 @@ test('selected shipment can export to CSV', async ({ page }) => {
     const shipmentsPage = new ShipmentsPage(page);
 
     await shipmentsPage.goto();
+    await shipmentsPage.waitForRows();
 
     const eligibleShipmentCheckbox = page
         .getByRole('row')

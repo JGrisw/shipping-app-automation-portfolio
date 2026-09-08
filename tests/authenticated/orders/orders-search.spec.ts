@@ -14,6 +14,7 @@ test('orders search can limit results to dynamically selected order', async ({ p
     const ordersPage = new OrdersPage(page);
 
     await ordersPage.goto();
+    await ordersPage.waitForRows();
 
     const firstOrderId = page
         .locator('tbody tr[data-row-id] td:nth-child(4)')

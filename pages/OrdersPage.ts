@@ -15,5 +15,15 @@ export class OrdersPage {
     // Open Orders directly for tests that are not testing navigation
     async goto() {
         await this.page.goto('/app/orders');
-    }
+    };
+
+    async waitForRows() {
+        await this.page
+            .locator('tbody tr[data-row-id]')
+            .first()
+            .waitFor({
+                state: 'visible',
+                timeout: 10000,
+            });
+    };
 }

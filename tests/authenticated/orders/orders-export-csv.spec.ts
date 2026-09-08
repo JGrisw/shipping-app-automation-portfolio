@@ -14,6 +14,7 @@ test('eligible order exports data to CSV', async ({ page }) => {
     const ordersPage = new OrdersPage(page);
 
     await ordersPage.goto();
+    await ordersPage.waitForRows();
 
     const eligibleOrderCheckbox = page
         .getByRole('row')

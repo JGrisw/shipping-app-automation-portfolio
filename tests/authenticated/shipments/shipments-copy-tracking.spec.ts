@@ -16,6 +16,7 @@ test('selected eligible shipment can copy tracking number', async ({ page, conte
     await context.grantPermissions(['clipboard-write']);
 
     await shipmentsPage.goto();
+    await shipmentsPage.waitForRows();
 
     const eligibleShipmentCheckbox = page
         .getByRole('row')

@@ -14,6 +14,7 @@ test('shipment ID sort toggles direction', async ({ page }) => {
     const shipmentsPage = new ShipmentsPage(page);
 
     await shipmentsPage.goto();
+    await shipmentsPage.waitForRows();
 
     const shipmentIdHeader = page.locator('th', { hasText: 'Shipment ID' });
 
@@ -22,7 +23,7 @@ test('shipment ID sort toggles direction', async ({ page }) => {
     );
 
     // Wait for shipment rows to finish rendering before reading their values.
-    await expect(shipmentIds.first()).toBeVisible();
+    await expect(shipmentIds.first()).toBeVisible({ timeout: 10000 });
 
     // First click applies ascending sort
     await shipmentIdHeader.click();

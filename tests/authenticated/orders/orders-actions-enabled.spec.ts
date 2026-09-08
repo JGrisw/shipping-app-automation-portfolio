@@ -15,6 +15,7 @@ test('selection dependent actions are enabled with order selected', async ({ pag
     const ordersPage = new OrdersPage(page);
 
     await ordersPage.goto();
+    await ordersPage.waitForRows();
 
     //dynamically grab a selected row
     const firstOrderRow = page

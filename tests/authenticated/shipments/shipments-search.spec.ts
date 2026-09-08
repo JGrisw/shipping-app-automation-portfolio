@@ -15,6 +15,7 @@ test('shipments search displays zero results for an unmatched query', async ({ p
     const shipmentsPage = new ShipmentsPage(page);
 
     await shipmentsPage.goto();
+    await shipmentsPage.waitForRows();
 
     const searchInput = page
         .getByRole('main')

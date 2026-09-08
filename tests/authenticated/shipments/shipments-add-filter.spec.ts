@@ -14,6 +14,7 @@ test('Filter can limit Shipments to a dynamically selected shipment', async ({ p
     const shipmentsPage = new ShipmentsPage(page); 
 
     await shipmentsPage.goto();
+    await shipmentsPage.waitForRows();
 
     const firstShipmentId = page
         .locator('tbody tr[data-row-id] td:nth-child(2) span.shipments-cell__mono')

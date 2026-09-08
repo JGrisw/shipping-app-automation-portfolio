@@ -15,6 +15,7 @@ test('shipment row expands to show details', async ({ page }) => {
     const shipmentsPage = new ShipmentsPage(page);
 
     await shipmentsPage.goto();
+    await shipmentsPage.waitForRows();
 
     const firstShipmentCell = page
         .getByRole('cell', { name: '#' })

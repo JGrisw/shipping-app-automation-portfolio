@@ -14,6 +14,7 @@ test('status filter limits shipments to selected status', async ({ page }) => {
     const shipmentsPage = new ShipmentsPage(page);
 
     await shipmentsPage.goto();
+    await shipmentsPage.waitForRows();
 
     const statusFilter = page.getByRole('button', {
         name: 'Expand "All statuses"',
