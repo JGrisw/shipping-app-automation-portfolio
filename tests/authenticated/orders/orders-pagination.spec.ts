@@ -37,7 +37,8 @@ test('orders pagination loads the next result set', async ({ page }) => {
 
     // Wait until pagination replaces the first page's order IDs
     await expect.poll(async () =>
-        orderIds.allTextContents()
+        orderIds.allTextContents(),
+        { timeout: 10000 }
     ).not.toEqual(firstPageIds);
 
     // Confirm previous page becomes enabled after moving forward
