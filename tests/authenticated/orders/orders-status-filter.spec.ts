@@ -26,6 +26,25 @@ test('status filter limits orders to selected status', async ({ page }) => {
 
     const readyToShipCountValue = await readyToShipCount.textContent();
 
-    console.log(readyToShipCountValue);
+    await readyToShipCard.click();
+
+    await expect(readyToShipCard).toHaveAttribute(
+        'aria-pressed',
+        'true'
+    );
+
+    if (!readyToShipCountValue)
+    {
+        throw new Error('Ready to Ship count was not available');
+    }
+
+    const filteredOrdercount = page.getByText(
+        `of ${readyToShipCountValue} orders`,
+        { exact: false }
+    );
+
+    await expect(filteredOrdercount).toContainText(
+        `of ${readyToShipCountValue} orders`
+    );
     
 });
