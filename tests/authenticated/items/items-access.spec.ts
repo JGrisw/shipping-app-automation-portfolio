@@ -18,4 +18,8 @@ test('authenticated user can directly access Items', async ({ page }) => {
     await expect(
         page.getByText('ITEMS', { exact: true })
     ).toBeVisible();
+
+    await expect(
+        page.locator('thead').getByText('SKU', { exact: true })
+    ).toBeVisible();
 });
