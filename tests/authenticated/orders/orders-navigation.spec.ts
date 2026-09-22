@@ -20,7 +20,7 @@ test('authenticated user can navigate to orders', async ({ page }) => {
 
     // Confirm the expected orders page rendered
     await expect(
-        page.getByText('Order Summary', { exact: true })
+        page.locator('[data-test="orders-title"]')
     ).toBeVisible();
 })
 

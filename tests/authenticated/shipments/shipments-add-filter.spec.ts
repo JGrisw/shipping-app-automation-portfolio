@@ -25,7 +25,7 @@ test('Filter can limit Shipments to a dynamically selected shipment', async ({ p
 
     const shipmentIdValue = await firstShipmentId.textContent();
 
-    await page.locator('[data-test="toolbar-add-filter"]').click();
+    await page.getByRole('button', { name: 'Add filter' }).click();
 
     await expect(
         page.getByRole('dialog').getByText('Add Filter', { exact: true })

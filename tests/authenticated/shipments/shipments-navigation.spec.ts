@@ -20,6 +20,6 @@ test('authenticated user can navigate to shipments', async ({ page }) => {
 
     //confirm the expected shipments page rendered
     await expect(
-        page.getByText('SHIPMENTS', { exact: true })
+        page.getByRole('main').getByText('Shipments', { exact: true })
     ).toBeVisible();
 })

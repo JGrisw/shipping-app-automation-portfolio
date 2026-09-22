@@ -16,7 +16,7 @@ test('authenticated user can directly access Items', async ({ page }) => {
     await itemsPage.goto();
 
     await expect(
-        page.getByText('ITEMS', { exact: true })
+        page.getByRole('main').getByText('Items', { exact: true })
     ).toBeVisible();
 
     await expect(

@@ -17,6 +17,6 @@ test('authenticated user can navigate to items', async ({ page }) => {
     await page.locator('a[href="/app/items"]').click();
 
     await expect(
-        page.getByText('ITEMS', { exact: true })
+        page.getByRole('main').getByText('Items', { exact: true })
     ).toBeVisible();
-})
+});
