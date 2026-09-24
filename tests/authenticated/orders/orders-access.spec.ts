@@ -20,6 +20,6 @@ test('authenticated user can directly access Orders', async ({ page }) => {
     ).toBeVisible();
 
     await expect(
-        page.getByRole('columnheader', { name: 'Order ID Filter Order ID'})
+        page.getByRole('columnheader', { name: 'Order ID Add filter for Order'})
     ).toBeVisible();
 });

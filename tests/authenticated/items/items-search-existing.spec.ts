@@ -21,7 +21,7 @@ test('items search displays results for a matched query', async ({ page }) => {
         .getByPlaceholder('Search...');
 
     const skuHeader = page.getByRole('columnheader', {
-        name: 'SKU Filter SKU',
+        name: 'SKU Add filter for SKU',
         exact: true,
     });
 

@@ -15,7 +15,7 @@ test('Orders Columns control can change visible table columns', async ({ page })
 
     await ordersPage.goto();
 
-    const durationColumn = page.getByRole('columnheader', { name: 'Duration Filter Duration' });
+    const durationColumn = page.getByRole('columnheader', { name: 'Duration Add filter for' });
 
     await expect(durationColumn).toBeVisible();
 

@@ -16,14 +16,14 @@ test('orders table displays core columns', async ({ page }) => {
     await ordersPage.goto();
 
     await expect(
-        page.getByRole('columnheader', { name: 'Order ID Filter Order ID'})
+        page.getByRole('columnheader', { name: 'Order ID Add filter for Order'})
     ).toBeVisible();
 
     await expect(
-        page.getByRole('columnheader', { name: 'Customer Filter Customer'})
+        page.getByRole('columnheader', { name: 'Customer Add filter for'})
     ).toBeVisible();
 
     await expect(
-        page.getByRole('columnheader', { name: 'Status Filter Status'})
+        page.getByRole('columnheader', { name: 'Status Add filter for Status'})
     ).toBeVisible();    
 });

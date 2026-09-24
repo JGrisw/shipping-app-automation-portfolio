@@ -1,5 +1,6 @@
 import { test, expect } from '@playwright/test';
 import { ShipmentsPage } from '../../../pages/ShipmentsPage';
+import { a } from 'motion/react-client';
 
 /*
  * What:
@@ -25,7 +26,8 @@ test('Filter can limit Shipments to a dynamically selected shipment', async ({ p
 
     const shipmentIdValue = await firstShipmentId.textContent();
 
-    await page.getByRole('button', { name: 'Add filter' }).click();
+    await page
+        .getByRole('button', { name: 'Add filter', exact: true }).click();
 
     await expect(
         page.getByRole('dialog').getByText('Add Filter', { exact: true })

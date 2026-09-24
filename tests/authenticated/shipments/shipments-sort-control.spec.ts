@@ -17,7 +17,7 @@ test('Sort control orders Shipments from oldest to newest', async ({ page }) => 
     await shipmentsPage.goto();
 
     const createDateHeader = page.getByRole('columnheader', {
-        name: 'Create Date Filter Create Date',
+        name: 'Create Date Add filter for',
     });
 
     const createDateColumnIndex = await createDateHeader.evaluate(
