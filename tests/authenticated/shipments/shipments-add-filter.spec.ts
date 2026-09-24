@@ -1,6 +1,5 @@
 import { test, expect } from '@playwright/test';
 import { ShipmentsPage } from '../../../pages/ShipmentsPage';
-import { a } from 'motion/react-client';
 
 /*
  * What:
