@@ -16,7 +16,7 @@ test('selection-dependent actions are disabled with no shipment selected', async
 
     await shipmentsPage.goto();
 
-    const actionsButton = page.locator('[data-test="actions-menu"]');
+    const actionsButton = shipmentsPage.table.actionsButton;
 
     await actionsButton.click();
 

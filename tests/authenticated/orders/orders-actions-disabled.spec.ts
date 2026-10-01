@@ -16,9 +16,7 @@ test('selection dependent actions are disabled with no order selected', async ({
 
     await ordersPage.goto();
 
-    const actionsButton = page.locator(
-        '[data-test="actions-menu"]'
-    );
+    const actionsButton = ordersPage.table.actionsButton;
 
     await actionsButton.click();
 

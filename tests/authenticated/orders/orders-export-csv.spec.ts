@@ -25,9 +25,7 @@ test('eligible order exports data to CSV', async ({ page }) => {
     await expect(eligibleOrderCheckbox).toBeVisible();
     await eligibleOrderCheckbox.check();
 
-    const actionsButton = page.locator(
-        '[data-test="actions-menu"]'
-    );
+    const actionsButton = ordersPage.table.actionsButton;
 
     await actionsButton.click();
 

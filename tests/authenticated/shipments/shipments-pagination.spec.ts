@@ -17,11 +17,10 @@ test('shipments pagination loads the next result set', async ({ page }) => {
     await shipmentsPage.goto();
     await shipmentsPage.waitForRows();
 
-    const nextPageButton = page.getByRole('button', { name: 'Next page' });
-    const previousPageButton = page.getByRole('button', { name: 'Previous page' });
-    const shipmentIds = page.locator(
-        'tbody tr[data-row-id] td:nth-child(2) span.shipments-cell__mono'
-    );
+    const nextPageButton = shipmentsPage.table.nextPageButton;
+    const previousPageButton = shipmentsPage.table.previousPageButton;
+
+    const shipmentIds = shipmentsPage.shipmentIds;
 
     // Confirm previous page is disabled on initial page
     await expect(previousPageButton).toBeDisabled();

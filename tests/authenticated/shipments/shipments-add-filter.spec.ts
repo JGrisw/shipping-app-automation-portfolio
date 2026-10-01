@@ -16,9 +16,7 @@ test('Filter can limit Shipments to a dynamically selected shipment', async ({ p
     await shipmentsPage.goto();
     await shipmentsPage.waitForRows();
 
-    const firstShipmentId = page
-        .locator('tbody tr[data-row-id] td:nth-child(2) span.shipments-cell__mono')
-        .first();
+    const firstShipmentId = shipmentsPage.shipmentIds.first();
 
     // Confirm a shipment is available before building the filter
     await expect(firstShipmentId).toBeVisible();
@@ -65,7 +63,7 @@ test('Filter can limit Shipments to a dynamically selected shipment', async ({ p
     // Confirm the filtered result matches the Shipment ID used in the filter
     await expect(firstShipmentId).toHaveText(shipmentIdValue);
 
-    const filteredRows = page.locator('tbody tr[data-row-id]');
+    const filteredRows = shipmentsPage.table.rows;
 
         test.fail(
         true,

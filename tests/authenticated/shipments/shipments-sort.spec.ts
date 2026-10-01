@@ -18,9 +18,7 @@ test('shipment ID sort toggles direction', async ({ page }) => {
 
     const shipmentIdHeader = page.locator('th', { hasText: 'Shipment ID' });
 
-    const shipmentIds = page.locator(
-    'tbody tr[data-row-id] td:nth-child(2) span.shipments-cell__mono'
-    );
+    const shipmentIds = shipmentsPage.shipmentIds;
 
     // Wait for shipment rows to finish rendering before reading their values.
     await expect(shipmentIds.first()).toBeVisible({ timeout: 10000 });

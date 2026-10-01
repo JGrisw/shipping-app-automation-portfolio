@@ -17,9 +17,7 @@ test('shipments search displays zero results for an unmatched query', async ({ p
     await shipmentsPage.goto();
     await shipmentsPage.waitForRows();
 
-    const searchInput = page
-        .getByRole('main')
-        .getByPlaceholder('Search...');
+    const searchInput = shipmentsPage.table.searchInput;
 
     // Use a deliberately impossible value to keep the result deterministic
     await searchInput.fill('__playwright_no_match__');

@@ -29,7 +29,7 @@ test('selected eligible shipment can copy tracking number', async ({ page, conte
 
     await eligibleShipmentCheckbox.check();
 
-    const actionsButton = page.locator('[data-test="actions-menu"]');
+    const actionsButton = shipmentsPage.table.actionsButton;
 
     await actionsButton.click();
 

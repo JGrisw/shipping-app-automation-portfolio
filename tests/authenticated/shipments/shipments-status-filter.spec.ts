@@ -37,7 +37,7 @@ test('status filter limits shipments to selected status', async ({ page }) => {
         page.getByRole('button', { name: 'Expand "Label created"' })
     ).toBeVisible();
 
-    const shipmentRows = page.locator('tbody tr[data-row-id]');
+    const shipmentRows = shipmentsPage.table.rows;
 
     // Wait for the filtered result set to render
     await expect(shipmentRows.first()).toBeVisible();

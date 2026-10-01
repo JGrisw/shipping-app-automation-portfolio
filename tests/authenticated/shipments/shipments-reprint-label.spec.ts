@@ -25,7 +25,7 @@ test('eligible shipment opens existing label PDF for reprint', async ({ page, co
         await expect(eligibleShipmentCheckbox).toBeVisible();
         await eligibleShipmentCheckbox.check();
 
-        await page.locator('[data-test="actions-menu"]').click();
+        await shipmentsPage.table.actionsButton.click();
 
         const reprintShippingLabels = page.locator(
         '[data-test="shipments-reprint-labels"]'

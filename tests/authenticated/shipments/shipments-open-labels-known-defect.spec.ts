@@ -24,7 +24,7 @@ test('eligible shipment can open selected labels', async ({ page }) => {
     await expect(eligibleShipmentCheckbox).toBeVisible();
     await eligibleShipmentCheckbox.check();
 
-    await page.locator('[data-test="actions-menu"]').click();
+    await shipmentsPage.table.actionsButton.click;
 
     const openSelectedLabels = page
         .getByRole('listitem')

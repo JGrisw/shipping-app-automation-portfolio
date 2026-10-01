@@ -17,9 +17,7 @@ test('order row expands to show details', async ({ page }) => {
     await ordersPage.goto();
     await ordersPage.waitForRows();
 
-    const firstOrderCell = page
-        .locator('tbody tr[data-row-id] td:nth-child(4)')
-        .first();
+    const firstOrderCell = ordersPage.orderIds.first();
 
     await firstOrderCell.click();
 

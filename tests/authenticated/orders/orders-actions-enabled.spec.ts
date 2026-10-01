@@ -17,18 +17,13 @@ test('selection dependent actions are enabled with order selected', async ({ pag
     await ordersPage.goto();
     await ordersPage.waitForRows();
 
-    //dynamically grab a selected row
-    const firstOrderRow = page
-        .locator('tbody tr[data-row-id]')
-        .first();
+    const firstOrderRow = ordersPage.table.rows.first();
 
     const firstOrderRowCheckbox = firstOrderRow.getByRole('checkbox');
 
     await firstOrderRowCheckbox.check();
 
-    const actionsButton = page.locator(
-        '[data-test="actions-menu"]'
-    );
+    const actionsButton = ordersPage.table.actionsButton;
 
     await actionsButton.click();
 

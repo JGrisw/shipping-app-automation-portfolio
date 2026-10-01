@@ -24,9 +24,7 @@ test('eligble order opens existing label PDF for reprint', async ({ page, contex
     await expect(eligibleOrderCheckbox).toBeVisible();
     await eligibleOrderCheckbox.check();
 
-    const actionsButton = page.locator(
-        '[data-test="actions-menu"]'
-    );
+    const actionsButton = ordersPage.table.actionsButton;
 
     await actionsButton.click();
 

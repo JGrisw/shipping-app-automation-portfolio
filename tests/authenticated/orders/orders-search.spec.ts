@@ -16,9 +16,7 @@ test('orders search can limit results to dynamically selected order', async ({ p
     await ordersPage.goto();
     await ordersPage.waitForRows();
 
-    const firstOrderId = page
-        .locator('tbody tr[data-row-id] td:nth-child(4)')
-        .first();
+    const firstOrderId = ordersPage.orderIds.first();
 
     await expect(firstOrderId).toBeVisible();
 
@@ -28,9 +26,7 @@ test('orders search can limit results to dynamically selected order', async ({ p
         throw new Error('Order ID value was not available');
     }
 
-    const searchInput = page
-        .getByRole('main')
-        .getByPlaceholder('Search...');
+    const searchInput = ordersPage.table.searchInput;
 
     await searchInput.fill(orderIdValue);
 

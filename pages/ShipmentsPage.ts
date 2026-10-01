@@ -1,4 +1,5 @@
-import type { Page } from '@playwright/test';
+import type { Locator, Page } from '@playwright/test';
+import { DataTable } from './components/DataTable';
 
 /*
  * What:
@@ -10,7 +11,17 @@ import type { Page } from '@playwright/test';
  */
 
 export class ShipmentsPage {
-    constructor(private readonly page: Page) {}
+
+    readonly table: DataTable;
+    readonly shipmentIds: Locator;
+
+    constructor(private readonly page: Page) {
+        this.table = new DataTable(page);
+
+        this.shipmentIds = page.locator(
+            'tbody tr[data-row-id] td:nth-child(2) span.shipments-cell__mono'
+        );
+    }
 
         // Open Shipments directly for tests that are not testing navigation itself
         async goto() {
@@ -18,12 +29,6 @@ export class ShipmentsPage {
         };
 
         async waitForRows() {
-            await this.page
-                .locator('tbody tr[data-row-id]')
-                .first()
-                .waitFor({
-                    state: 'visible',
-                    timeout: 10000,
-                });
+            await this.table.waitForRows();
         };
 };
