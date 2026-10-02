@@ -23,15 +23,20 @@ test('Filter can limit Shipments to a dynamically selected shipment', async ({ p
 
     const shipmentIdValue = await firstShipmentId.textContent();
 
+        if (!shipmentIdValue) {
+        throw new Error('Shipment ID value was not available');
+    }
+
     await page
         .getByRole('button', { name: 'Add filter', exact: true }).click();
 
+    const filterDialog = page.getByRole('dialog');
+
     await expect(
-        page.getByRole('dialog').getByText('Add Filter', { exact: true })
+        filterDialog.getByText('Add Filter', { exact: true })
     ).toBeVisible();
 
-    await page
-        .getByRole('dialog')
+    await filterDialog
         .locator('div')
         .filter({ hasText: /^Column$/ })
         .first()
@@ -39,8 +44,7 @@ test('Filter can limit Shipments to a dynamically selected shipment', async ({ p
 
     await page.getByRole('option', { name: 'Shipment Id '}).click();
 
-    await page
-        .getByRole('dialog')
+    await filterDialog
         .locator('div')
         .filter({ hasText: /^Operator$/ })
         .first()
@@ -48,15 +52,11 @@ test('Filter can limit Shipments to a dynamically selected shipment', async ({ p
 
     await page.getByRole('option', { name: 'is equal to' }).click();
 
-    if (!shipmentIdValue) {
-        throw new Error('Shipment ID value was not available');
-    }
-
-    await page
+    await filterDialog
         .getByRole('combobox', { name: 'Value' })
         .fill(shipmentIdValue);
 
-    await page
+    await filterDialog
         .getByRole('button', { name: 'Apply' })
         .click();
 
