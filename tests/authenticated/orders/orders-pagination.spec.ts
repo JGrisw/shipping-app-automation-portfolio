@@ -3,10 +3,10 @@ import { OrdersPage } from '../../../pages/OrdersPage';
 
 /*
  * What:
- * Verify moving to the next orders page changes the visible result set
+ * Verify moving to the next Order page changes the visible result set
  *
  * Why:
- * Confirms pagination updates the displayed the data without depending
+ * Confirms pagination updates the displayed data without depending
  * on fixed order records or a fixed total count
  */
 
@@ -21,12 +21,13 @@ test('orders pagination loads the next result set', async ({ page }) => {
 
     const orderIds = ordersPage.orderIds;
 
-    // Confirm previous page is disabled on initial page
+    // Confirm Previous is disabled on initial page
     await expect(previousPageButton).toBeDisabled();
 
-    // Wait for the initial result set before capturing its IDs
+    // Confirm the initial result set is available before capturing its Order IDs
     await expect(orderIds.first()).toBeVisible();
 
+    // Capture the first page so we can prove the result set actually changes
     const firstPageIds = await orderIds.allTextContents();
 
     await expect(nextPageButton).toBeEnabled();

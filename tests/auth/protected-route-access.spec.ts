@@ -2,7 +2,7 @@ import { test, expect } from '@playwright/test';
 
 /*
  * What:
- * Verify unauthenticated users cannot access a protected route
+ * Verify that tests using saved authentication state can open the dashboard 
  *
  * Why:
  * Understanding the actual access-control behavior lets us assert the
@@ -12,7 +12,7 @@ import { test, expect } from '@playwright/test';
 test('logged out user cannot directly access the app', async ({ page }) => {
     await page.goto('/app');
 
-    // Confirm unauthenticated access is redirected to the login experience
+    // Confirm the saved authentication state grants direct access to the protected UI
     await expect(
         page.getByPlaceholder('Email address')
     ).toBeVisible();

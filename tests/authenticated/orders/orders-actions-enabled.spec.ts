@@ -4,11 +4,11 @@ import { OrdersPage } from '../../../pages/OrdersPage';
 /*
  * What:
  * Verify selection dependent order actions are enabled when
- * orders are selected
+ * an Order is selected
  *
  * Why:
- * Verifies actions that require order context to be triggered
- * trigger when appropriately selected
+ * Confirms actions that require Order context become available only
+ * after the user provides a valid selection
  */
 
 test('selection dependent actions are enabled with order selected', async ({ page }) =>{
@@ -17,8 +17,8 @@ test('selection dependent actions are enabled with order selected', async ({ pag
     await ordersPage.goto();
     await ordersPage.waitForRows();
 
+    // Select the first available Order without depending on a fixed Order Id
     const firstOrderRow = ordersPage.table.rows.first();
-
     const firstOrderRowCheckbox = firstOrderRow.getByRole('checkbox');
 
     await firstOrderRowCheckbox.check();
@@ -31,8 +31,9 @@ test('selection dependent actions are enabled with order selected', async ({ pag
         '[data-test="orders-reprint-labels"]'
     );
 
+
     await expect(reprintShippingLabels).not.toHaveAttribute(
         'aria-disabled',
-        'false'
+        'true'
     );
 });

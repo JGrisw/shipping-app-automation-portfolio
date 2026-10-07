@@ -3,7 +3,7 @@ import { OrdersPage } from '../../../pages/OrdersPage';
 
 /*
  * What:
- * Verify the orders table renders its core identifying columns
+ * Verify the Orders table renders its core identifying columns
  *
  * Why:
  * Structural assertions provide stable coverage of the page contract
@@ -15,6 +15,7 @@ test('orders table displays core columns', async ({ page }) => {
 
     await ordersPage.goto();
 
+    // Verify stable table structure using always present column headers
     await expect(
         page.getByRole('columnheader', { name: 'Order ID Add filter for Order'})
     ).toBeVisible();

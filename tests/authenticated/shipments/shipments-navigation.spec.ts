@@ -2,23 +2,23 @@ import { test, expect } from '@playwright/test';
 
 /**
  * What:
- * explore navigation from the authenticated app to the shipments page
+ * Verify an authenticated user can navigate to the Shipments page through the app UI
  *
  * Why:
- * this establishes the first protected workflow before we begin
- * asserting shipment data or table behavior
+ * Confirms the protected Shipments navigation path works independently of direct route
+ * access and table behavior
  */
 
 test('authenticated user can navigate to shipments', async ({ page }) => {
     await page.goto('/app');
 
-    //expand orders so the shipments submenu becomes visible
+    // Expand the Orders so the Shipments submenu becomes visible
     await page.getByText('Orders', { exact: true }).click();
 
-    //navigate through the now visible shipments link
+    // Use the rendered Shipments link to exercise real sidebar navigation
     await page.locator('a[href="/app/orders/shipments"]').click();
 
-    //confirm the expected shipments page rendered
+    // Confirm the Shipments page rendered after navigating through the UI
     await expect(
         page.getByRole('main').getByText('Shipments', { exact: true })
     ).toBeVisible();

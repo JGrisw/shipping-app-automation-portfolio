@@ -17,11 +17,12 @@ test('order row expands to show details', async ({ page }) => {
     await ordersPage.goto();
     await ordersPage.waitForRows();
 
+    // Use the first available Order ID cell as a stable click target for row expansion
     const firstOrderCell = ordersPage.orderIds.first();
 
     await firstOrderCell.click();
 
-    //Confirm expanded order details become available
+    //Confirm content unique to the expanded row becomes visible
     await expect(
         page.getByText('Fulfillment').first()
     ).toBeVisible();

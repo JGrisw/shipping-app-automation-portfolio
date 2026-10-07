@@ -3,7 +3,7 @@ import { ShipmentsPage } from '../../../pages/ShipmentsPage';
 
 /*
  * What:
- * Verify shipments search handles a query with no matching records
+ * Verify Shipments search handles a query with no matching records
  *
  * Why:
  * A deterministic no result search tests filtering behavior without

@@ -35,5 +35,4 @@ export class DataTable {
                 timeout: 10000,
             });
     }
-    
 }

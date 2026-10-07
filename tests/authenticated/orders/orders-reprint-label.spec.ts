@@ -15,6 +15,7 @@ test('eligble order opens existing label PDF for reprint', async ({ page, contex
     await ordersPage.goto();
     await ordersPage.waitForRows();
 
+    // Select an eligible shipped Order without depending on a fixed Order ID
     const eligibleOrderCheckbox = page
         .getByRole('row')
         .filter({hasText: 'shipped' })
@@ -32,11 +33,13 @@ test('eligble order opens existing label PDF for reprint', async ({ page, contex
         '[data-test="orders-reprint-labels"]'
     );
 
+    // Confirm the label action becomes available for the selected Order
     await expect(reprintShippingLabels).not.toHaveAttribute(
         'aria-disabled',
         'true'
     );
 
+    // Start listening before the click so we do not miss the PDF response or popup
     const pdfResponsePromise = context.waitForEvent('response', response => {
         return response.headers()['content-type']?.includes('application/pdf') === true;
     });
@@ -45,6 +48,7 @@ test('eligble order opens existing label PDF for reprint', async ({ page, contex
 
     await reprintShippingLabels.click();
 
+    // Confirm the application received a successful PDF response with actual content 
     const pdfResponse = await pdfResponsePromise;
 
     expect(pdfResponse.ok()).toBe(true);
@@ -55,6 +59,7 @@ test('eligble order opens existing label PDF for reprint', async ({ page, contex
 
     const labelPage = await labelPagePromise;
 
+    // Confirm the label opened in a new tab and remained available to the user
     expect(labelPage.isClosed()).toBe(false);
 
     await expect(

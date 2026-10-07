@@ -28,6 +28,7 @@ test('status filter limits orders to selected status', async ({ page }) => {
 
     await readyToShipCard.click();
 
+    // arie-pressed confirms the selected status card became the active filter
     await expect(readyToShipCard).toHaveAttribute(
         'aria-pressed',
         'true'
@@ -43,6 +44,7 @@ test('status filter limits orders to selected status', async ({ page }) => {
         { exact: false }
     );
 
+    // Confirm the filtered total matches the count advertised by the status card
     await expect(filteredOrdercount).toContainText(
         `of ${readyToShipCountValue} orders`
     );
