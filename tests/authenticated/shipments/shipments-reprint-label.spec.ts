@@ -31,7 +31,7 @@ test('eligible shipment opens existing label PDF for reprint', async ({ page, co
         '[data-test="shipments-reprint-labels"]'
         );
 
-        // Confirm Reprint Shipping Labels becomes available for the selection
+        // Confirm Reprint Shipping Labels becomes available for the selected Shipment
         await expect(reprintShippingLabels).not.toHaveAttribute(
             'aria-disabled',
             'true'
@@ -53,15 +53,15 @@ test('eligible shipment opens existing label PDF for reprint', async ({ page, co
 
         const pdfBody = await pdfResponse.body();
 
-        // Confirm the returned PDF contains data
+        // Confirm the returned PDF contains actual label data
         expect(pdfBody.length).toBeGreaterThan(0);
 
         const labelPage = await labelPagePromise;
 
-        // Confirm the newly opened label tab remains available
+        // Confirm the newly opened label tab remains available to the user
         expect(labelPage.isClosed()).toBe(false);
 
-        // Confirm the application reports that the label was opened
+        // Confirm the application reports that the label was opened successfully
         await expect(
             page.getByText('Opened 1 label in a single PDF.', { exact: true })
         ).toBeVisible();

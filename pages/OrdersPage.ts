@@ -3,11 +3,12 @@ import { DataTable } from './components/DataTable';
 
 /*
  * What:
- * Encapsulate shared navigation for the Orders page
+ * Encapsulate Orders specific navigation and table locators while exposing
+ * shared table behavior through DataTable
  *
  * Why:
- * Keeping repeated page knowledge in one place reduces duplication
- * while leaving each test responsible for its own behavior and assertions
+ * Keeps repeated UI knowledge in one place while leaving test behavior and
+ * assertions inside the individual Orders specs
  */
 
 export class OrdersPage {
@@ -18,12 +19,13 @@ export class OrdersPage {
     constructor(private readonly page: Page) {
         this.table = new DataTable(page);
 
+        // Keep Orders specific column knowledge here instead of in the shared DataTable
         this.orderIds = page.locator(
             'tbody tr[data-row-id] td:nth-child(4)'
         );
     }
 
-    // Open Orders directly for tests that are not testing navigation
+    // Open Orders directly for tests that are not testing navigation itself
     async goto() {
         await this.page.goto('/app/orders');
     };

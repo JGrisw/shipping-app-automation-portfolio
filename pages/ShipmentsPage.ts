@@ -3,11 +3,12 @@ import { DataTable } from './components/DataTable';
 
 /*
  * What:
- * Encapsulate shared navigation for the Shipments page
+ * Encapsulate Shipment specific navigation and table locators while exposing
+ * shared table behavior through DataTable
  *
  * Why:
- * Keeping repeated page knowledge in one place reduces duplication while
- * leaving each test responsible for its own behavior and assertions
+ * Keeping repeated page knowledge in one place while leaving test behavior and
+ * assertions inside the individual Shipments specs
  */
 
 export class ShipmentsPage {
@@ -18,6 +19,7 @@ export class ShipmentsPage {
     constructor(private readonly page: Page) {
         this.table = new DataTable(page);
 
+        // Keep Shipments specific column knowledge here instead of in the shared DataTable
         this.shipmentIds = page.locator(
             'tbody tr[data-row-id] td:nth-child(2) span.shipments-cell__mono'
         );

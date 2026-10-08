@@ -1,5 +1,13 @@
 import type { Locator, Page } from '@playwright/test';
 
+/*
+ * What:
+ * Encapsulate table controls shared across authenticated data table pages
+ *
+ * Why:
+ * Centralizing repeating table locators and readiness logic reduces duplication
+ * while keeping page specific behavior in each Page Object and test
+ */
 
 export class DataTable {
     readonly nextPageButton: Locator; 
@@ -28,6 +36,7 @@ export class DataTable {
     }
 
     async waitForRows() {
+        // Allow additional time for API-backend table data to finish rendering
         await this.rows
             .first()
             .waitFor({

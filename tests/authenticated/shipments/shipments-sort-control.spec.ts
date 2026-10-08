@@ -16,6 +16,7 @@ test('Sort control orders Shipments from oldest to newest', async ({ page }) => 
 
     await shipmentsPage.goto();
 
+    // Resolve the Create Date column dynamically instead of depending on a fixed position
     const createDateHeader = page.getByRole('columnheader', {
         name: 'Create Date Add filter for',
     });
@@ -24,10 +25,12 @@ test('Sort control orders Shipments from oldest to newest', async ({ page }) => 
         (header) => (header as HTMLTableCellElement).cellIndex
     );
 
-    const createDateCells = page.locator(
-        `tbody tr[data-row-id] td:nth-child(${createDateColumnIndex + 1})`
-    );
+    // cellIndex is zero-based while CSS nth-child() is one-based
+    const createDateCells = shipmentsPage.table.rows.locator(
+        `td:nth-child(${createDateColumnIndex + 1})`
+    )
 
+    // Confirm date values are available before changing the sort order
     await expect(createDateCells.first()).toBeVisible();
 
     await page
@@ -36,6 +39,7 @@ test('Sort control orders Shipments from oldest to newest', async ({ page }) => 
 
     await page.getByText('Oldest to newest', { exact: true }).click();
 
+    // Verify the rendered Create Dates actually change the ascending order.
     await expect.poll(async () => {
         const createDates = await createDateCells.allTextContents();
 

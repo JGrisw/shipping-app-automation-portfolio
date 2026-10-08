@@ -17,6 +17,8 @@ test('selected shipment can export to CSV', async ({ page }) => {
     await shipmentsPage.goto();
     await shipmentsPage.waitForRows();
 
+    // Use a Label created Shipment so the test has an exportable record
+    // without depending on a fixed Shipment ID
     const eligibleShipmentCheckbox = page
         .getByRole('row')
         .filter({ hasText: 'Label created' })
@@ -39,17 +41,17 @@ test('selected shipment can export to CSV', async ({ page }) => {
 
     const exportCsvButton = page.getByRole('button', { name: 'Export CSV' });
 
-    // Start listening before the click so we don't miss the download event
+    // Start listening before the final click so the download event is not missed
     const downloadPromise = page.waitForEvent('download');
 
     await exportCsvButton.click();
 
     const download = await downloadPromise;
 
-    // Confirm the browser received a CSV file
+    // Confirm the browser received the expected file type
     expect(download.suggestedFilename()).toMatch(/\.csv$/i);
 
-    // Confirm the browser completed the download without an error
+    // A successful Playwright download reports no failure message
     expect(await download.failure()).toBeNull();
 
     const downloadPath = await download.path();

@@ -6,7 +6,7 @@ import { ShipmentsPage } from '../../../pages/ShipmentsPage';
  * Verify the Shipments status filter limits results to the selected status
  *
  * Why:
- * Confirms users can narrow the Shipments table by shipment status without
+ * Confirms users can narrow the Shipments table by Shipment status without
  * depending on a specific shipment record
  */
 
@@ -26,7 +26,7 @@ test('status filter limits shipments to selected status', async ({ page }) => {
         .getByRole('list')
         .getByText('Label created', { exact: true });
 
-    // Confirm the expected status option is available in the filter menu
+    // Confirm the expected status option is available before applying the filter
     await expect(labelCreatedOption).toBeVisible();
 
     // Apply the Label created status filter

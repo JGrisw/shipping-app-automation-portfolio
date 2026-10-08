@@ -3,11 +3,11 @@ import { ShipmentsPage } from '../../../pages/ShipmentsPage';
 
 /*
  * What:
- * Verify selection dependent shipments actions are disabled when no
+ * Verify selection dependent Shipment actions are disabled when no
  * shipments are selected
  *
  * Why:
- * Prevents actions that require shipment context from being triggered
+ * Prevents actions that require Shipment context from being triggered
  * with an empy selection
  */
 
@@ -18,13 +18,14 @@ test('selection-dependent actions are disabled with no shipment selected', async
 
     const actionsButton = shipmentsPage.table.actionsButton;
 
+    // Open Actions without selecting a Shipment to verify empty-selection safeguard
     await actionsButton.click();
 
     const cancelSelectedLabels = page.locator(
         '[data-test="shipments-cancel-selected-labels"]'
     );
 
-    // Confirm selection dependent actions cannot be run with an empty selection
+    // Selection-dependent menu actions expose disabled state through aria-diabled
     await expect(cancelSelectedLabels).toHaveAttribute(
         'aria-disabled',
         'true'

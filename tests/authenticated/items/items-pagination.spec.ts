@@ -31,7 +31,7 @@ test('items pagination loads the next result set', async ({ page }) => {
         name: 'Previous page',
     });
 
-    // Capture the current total dynamically.
+    // Capture the current total so pagination assertions do not depend on a fixed Item count
     const itemCountSummary = page.getByText(
         /Showing \d+ to \d+ of \d+ items/
     );
@@ -47,11 +47,12 @@ test('items pagination loads the next result set', async ({ page }) => {
 
     const totalItems = Number(totalMatch[1]);
 
+    // Pagination requires more Items than the five row page sized used by this test
     if (totalItems <= 5) {
         throw new Error('Not enough items available to test pagination');
     }
 
-    // Force pagination by reducing the page size to five rows.
+    // Reduce the page size to five rows so pagination is guaranteed with the available test data
     const rowsPerPageButton = page
         .getByText('arrow_drop_down')
         .nth(3);

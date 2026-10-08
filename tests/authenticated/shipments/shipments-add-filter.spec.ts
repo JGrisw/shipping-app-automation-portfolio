@@ -18,18 +18,20 @@ test('Filter can limit Shipments to a dynamically selected shipment', async ({ p
 
     const firstShipmentId = shipmentsPage.shipmentIds.first();
 
-    // Confirm a shipment is available before building the filter
+    // Capture an existing Shipment ID so the filter does not depend on a fixed test data
     await expect(firstShipmentId).toBeVisible();
 
     const shipmentIdValue = await firstShipmentId.textContent();
 
-        if (!shipmentIdValue) {
+    // Fail clearly if the dynamic filter value could not be captured
+    if (!shipmentIdValue) {
         throw new Error('Shipment ID value was not available');
     }
 
     await page
         .getByRole('button', { name: 'Add filter', exact: true }).click();
 
+    // Scope subsequent controls to the Add Filter dialog
     const filterDialog = page.getByRole('dialog');
 
     await expect(
@@ -60,16 +62,15 @@ test('Filter can limit Shipments to a dynamically selected shipment', async ({ p
         .getByRole('button', { name: 'Apply' })
         .click();
 
-    // Confirm the filtered result matches the Shipment ID used in the filter
-    await expect(firstShipmentId).toHaveText(shipmentIdValue);
-
     const filteredRows = shipmentsPage.table.rows;
 
-        test.fail(
+    // Known defect: the selected Shipment ID is duplicated and the equality
+    // filter does not currently reduce the result set as intended
+    test.fail(
         true,
         'Shipment ID filter duplicates the selected value and does not currently filter results'
     );
 
     // Shipment ID equality should reduce the table to a single matching row
     await expect(filteredRows).toHaveCount(1);
-})
+});

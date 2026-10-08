@@ -25,11 +25,12 @@ test("Create date filter filters Shipments by created-after-date", async ({ page
 
     const createdAfter = page.getByRole('textbox', { name: 'Created after' });
 
-    // Use a future date that should exclude all existing shipments
+    // Use a far future date to produce a deterministic zero result state
     await createdAfter.fill('12312099');
 
     await page.getByRole('button', { name: 'Apply' }).click();
 
+    // Confirm the date filter actually reduced the table to zero matching Shipments
     await expect(
         page.getByText('Showing 0 to 0 of 0 shipments', { exact: true })
     ).toBeVisible();

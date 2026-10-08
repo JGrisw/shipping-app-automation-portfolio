@@ -15,10 +15,12 @@ test('authenticated user can directly access Items', async ({ page }) => {
     
     await itemsPage.goto();
 
+    // Confirm the Items page itself rendered Successfully
     await expect(
         page.getByRole('main').getByText('Items', { exact: true })
     ).toBeVisible();
 
+    // Confirm the primary Items table initialized, not just the page shell
     await expect(
         page.locator('thead').getByText('SKU', { exact: true })
     ).toBeVisible();

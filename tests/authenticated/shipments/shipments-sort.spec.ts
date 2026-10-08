@@ -6,7 +6,7 @@ import { ShipmentsPage } from '../../../pages/ShipmentsPage';
  * Verify Shipment ID sorting toggles direction and reorders the visible rows
  *
  * Why:
- * Confirms the sort control state and rendered shipment ID order stay aligned
+ * Confirms the sort control state and rendered Shipment ID order stay aligned
  */
 
 test('shipment ID sort toggles direction', async ({ page }) => {
@@ -16,22 +16,22 @@ test('shipment ID sort toggles direction', async ({ page }) => {
     await shipmentsPage.goto();
     await shipmentsPage.waitForRows();
 
+    // Use the Shipment ID header as both the sort trigger and state indicator
     const shipmentIdHeader = page.locator('th', { hasText: 'Shipment ID' });
 
     const shipmentIds = shipmentsPage.shipmentIds;
 
-    // Wait for shipment rows to finish rendering before reading their values.
+    // Confirm Shipment IDs are available before evaluating their order
     await expect(shipmentIds.first()).toBeVisible({ timeout: 10000 });
 
     // First click applies ascending sort
     await shipmentIdHeader.click();
 
-    // Confirm the header is marked as sorted
+    // Verify the header reports ascending sort state
     await expect(shipmentIdHeader).toHaveClass(/sorted/);
-    // Confirm descending is NOT active yet
     await expect(shipmentIdHeader).not.toHaveClass(/sort-desc/);
 
-    // Wait for the refreshed rows to reflect ascending order
+    // Wait for the refreshed rows to reflect ascending numeric order
     await expect.poll(async () => {
         const ids = (await shipmentIds.allTextContents()).map(Number);
 
@@ -43,10 +43,10 @@ test('shipment ID sort toggles direction', async ({ page }) => {
     // Second click applies descending sort
     await shipmentIdHeader.click();
 
-    // Confirm descending sort is now active
+    // Verify the header reports descending sort state
     await expect(shipmentIdHeader).toHaveClass(/sort-desc/);
 
-    // Wait for the refreshed rows to reflect descending order
+    // Wait for the refreshed rows to reflect descending numeric order
     await expect.poll(async () => {
         const ids = (await shipmentIds.allTextContents()).map(Number);
 

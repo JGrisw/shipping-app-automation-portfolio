@@ -4,11 +4,12 @@ import { DataTable } from './components/DataTable';
 
 /*
  * What:
- * Encapsulate shared navigation for the Items page
+ * Encapsulate Items navigation while exposing shared table behavior
+ * through DataTable
  *
  * Why:
- * Keeping repeated page knowledge in one place reduces duplication
- * while leaving each test responsible for its own behavior and assertions
+ * Keeping repeated table interaction centralized while leaving Items specific
+ * behavior and assertions inside the individual Items specs
  */
 
 export class ItemsPage {
@@ -19,6 +20,7 @@ export class ItemsPage {
         this.table = new DataTable(page);
     }
 
+    // Open Items directly for tests taht are not testing navigation itself
     async goto() {
         await this.page.goto('/app/items');
     };

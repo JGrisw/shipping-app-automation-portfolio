@@ -9,7 +9,7 @@ import { OrdersPage } from '../../../pages/OrdersPage';
  * Validates the label retrieval workflow without modifying shipping data
  */
 
-test('eligble order opens existing label PDF for reprint', async ({ page, context }) => {
+test('eligible order opens existing label PDF for reprint', async ({ page, context }) => {
     const ordersPage = new OrdersPage(page);
 
     await ordersPage.goto();

@@ -3,7 +3,7 @@ import { ItemsPage } from '../../../pages/ItemsPage';
 
 /*
  * What:
- * Verify items search handles a query with no matching records
+ * Verify Items search handles a query with no matching records
  *
  * Why:
  * A deterministic no result search tests filtering behavior without
@@ -21,11 +21,14 @@ test('items search displays zero results for an unmatched query', async ({ page 
         .getByRole('main')
         .getByPlaceholder('search...');
 
+    // Use a deliberately impossible value to keep the result deterministic
     await searchInput.fill('__playwright_no_match__');
 
+    // Confirm the table reaches the expected zero result state
     await expect(
         page.getByText('Showing 0 to 0 of 0 items', { exact: true })
     ).toBeVisible();
 
+    // Confirm the entered search value remains applied
     await expect(searchInput).toHaveValue('__playwright_no_match__');
 });
